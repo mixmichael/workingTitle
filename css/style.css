@@ -1,0 +1,40 @@
+body{
+    background-color:	#A9A9A9;
+}
+p{
+    direction: rtl;
+    font-size: 20px;
+    font-family: 'Secular One', sans-serif;
+}
+#box
+{
+    background-color: #3c485b;
+    height: 500px;
+    width: 500px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius:10px;
+    color: white;
+    font-size:20px;
+}
+#box h2{
+   
+    text-align: center;
+    font-family: 'Amatica SC', cursive;
+    font-weight: bold;
+    font-size: 40px;
+}
+#check
+{
+    padding: 10px;
+    font-size: 10px;
+}
+#check input{
+    position:relative;
+    top: 5px;
+    
+}
+a{
+    margin: auto;
+}
