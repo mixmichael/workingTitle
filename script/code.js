@@ -27,8 +27,19 @@ function start() {
 
                         }
                         else {
-                            alert(list[Math.random() * 3 + 1])
-                        }
+                            alertify.set({
+                            labels: {
+                                ok: "אישור",
+                                cancel: "כן"
+                            }});
+                            alertify.alert(list[Math.floor(Math.random()*list.length)]);
+                    alertify.set({
+                            labels: {
+                                ok: "לא",
+                                cancel: "כן"
+                            }});    
+                    }
                     });
             }
             var list = ["מקום1", "מקום 2", "מקום 3"];
+            
