@@ -32,7 +32,7 @@ function start() {
                                 ok: "אישור",
                                 cancel: "כן"
                             }});
-                            alertify.alert(list[Math.floor(Math.random()*list.length)]);
+                            alertify.alert(list[Math.floor(Math.random()*list.length)].printDes());
                     alertify.set({
                             labels: {
                                 ok: "לא",
@@ -41,5 +41,17 @@ function start() {
                     }
                     });
             }
-            var list = ["מקום1", "מקום 2", "מקום 3"];
+            var place1 = new destination("לנדור",3,false,true),palce2 = new destination("לנדור",3,false,true);
+            var list = [place1];
+            function destination(name, distance, hasCoffe, hasBear)
+            {
+                this.name = name;
+                this.distance = distance;
+                this.hasCoffe = hasCoffe;
+                this.hasBear = hasBear;
+                this.printDes = function()
+                {
+                    return "שם:" + this.name + "</br> מרחק:" + this.distance + "</br>קפה:" + (this.hasCoffe ? "יש":"אין") + "</br>בירה:"+(this.hasBear ? "יש":"אין");
+                }
+            }
             
