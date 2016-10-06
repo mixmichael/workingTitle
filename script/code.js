@@ -1,3 +1,4 @@
+//אנימציה פתיחה של הדף
 $(document).ready(function () {
     alertify.set({
         labels: {
@@ -10,7 +11,11 @@ $(document).ready(function () {
 });
 
 
+
+//פונקציה לזמן לחיצה על הכפתור
 function start() {
+
+    //בודק איזה כפתורים (chcekbox) לחוצים
     if ($("#onlyIfBeer").is(':checked')) {
         onlyIfBeer = true;
     }
@@ -23,6 +28,9 @@ function start() {
     if ($("#tierdOfLan").is(':checked')) {
         tiredOfLa = true;
     }
+
+
+
     alertify.set({labels:{ok:"לא",cancel:"כן"}});
     alertify.confirm("האם הלל הנהג?", function (e, str) {
             if (!e) {
@@ -34,7 +42,7 @@ function start() {
                     labels: {
                         ok: "אישור",
                         cancel: "כן"}});
-                alertify.alert(list[Math.floor(Math.random() * list.length)].printDes());
+                alertify.alert(randomChoose().printDes());
             } 
             else {
                 alertify.set({
@@ -43,7 +51,7 @@ function start() {
                         cancel: "כן"
                     }
                 });
-                alertify.alert(list[Math.floor(Math.random() * list.length)].printDes());
+                alertify.alert(randomChoose().printDes());
                 alertify.set({
                     labels: {
                         ok: "לא",
@@ -57,23 +65,46 @@ function start() {
 
 
 
+//רשימה של "יעדים אפשרים" א
+    var place1 = new destination("לנדוור", 3, false, true,false);
+    var palce2 = new destination("לנדוור", 3, false, true,false);
+    var list = [place1];
 
+//הגדרת האוביקט לצורך יעד
+    function destination(name, distance, hasCoffe, hasBear,zicronn) {
+        this.name = name;
+        this.distance = distance;
+        this.hasBear = hasBear;
+        this.zicron = zicronn;
+        this.printDes = function () {
+            return "שם:" + this.name + "</br> מרחק:" + this.distance + "</br>קפה:" + (this.hasCoffe ? "יש" : "אין") + "</br>בירה:" + (this.hasBear ? "יש" : "אין");
+        }
+    }
+    function randomChoose()
+    {
+        found = false
+        while(!found)
+        {
+            var temp = list[Math.floor(Math.random() * list.length)];
+            if(
+                ((onlyIfBeer && temp.hasBear)|| !onlyIfBeer) &&
+                ((temp.zicron && zicron) || !zicron) &&
+                ((tiredOfLa && temp.name != "לנדוור") ||(!tiredOfLa)) &&
+                ((!onlyUnder5)||(onlyUnder5 && temp.distance <= 5)) &&
+                ((!drugsBeerPlay) || (drugsBeerPlay && temp.name == "on"))
+            )
+            {
+                found = true;
+            }
+        }
+        return temp;
+    }
+
+//משתנים למעקב אחרי צורת הסינון
     var zicron = false,
         onlyIfBeer = false,
         tiredOfLa = false,
         drugsBeerPlay = false,
         onlyUnder5 = false;
 
-    var place1 = new destination("לנדור", 3, false, true);
-    var palce2 = new destination("לנדור", 3, false, true);
-    var list = [place1];
 
-    function destination(name, distance, hasCoffe, hasBear) {
-        this.name = name;
-        this.distance = distance;
-        this.hasCoffe = hasCoffe;
-        this.hasBear = hasBear;
-        this.printDes = function () {
-            return "שם:" + this.name + "</br> מרחק:" + this.distance + "</br>קפה:" + (this.hasCoffe ? "יש" : "אין") + "</br>בירה:" + (this.hasBear ? "יש" : "אין");
-        }
-    }
